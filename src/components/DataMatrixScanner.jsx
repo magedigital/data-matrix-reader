@@ -10,7 +10,7 @@ function DataMatrixScanner({
   const videoRef = useRef(null);
   const uscannerRef = useRef(null);
   const [isReady, setIsReady] = useState(false);
-  const [isUIHidden, setIsUIHidden] = useState(false);
+  const [isUIHidden, setIsUIHidden] = useState(true);
   const [isScanning, setIsScanning] = useState(false);
   const onEventRef = useRef(onEvent);
   const onLogRef = useRef(onLog);
@@ -164,31 +164,31 @@ function DataMatrixScanner({
     };
   }, [config, emitCameraTrack]);
 
-  useEffect(() => {
-    const applyStyle = () => {
-      const host = document.querySelector("scanner-ui");
+  // useEffect(() => {
+  //   const applyStyle = () => {
+  //     const host = document.querySelector("scanner-ui");
 
-      if (host && host.shadowRoot) {
-        const style = document.createElement("style");
-        style.textContent = `
-        .u-scanner-ui__watermark, .u-scanner-ui__control-panel { 
-          display: none !important;
-        }
-      `;
-        host.shadowRoot.appendChild(style);
-        setIsUIHidden(true);
-        return true;
-      }
-      return false;
-    };
+  //     if (host && host.shadowRoot) {
+  //       const style = document.createElement("style");
+  //       style.textContent = `
+  //       .u-scanner-ui__watermark, .u-scanner-ui__control-panel {
+  //         display: none !important;
+  //       }
+  //     `;
+  //       host.shadowRoot.appendChild(style);
+  //       setIsUIHidden(true);
+  //       return true;
+  //     }
+  //     return false;
+  //   };
 
-    if (!applyStyle()) {
-      const interval = setInterval(() => {
-        if (applyStyle()) clearInterval(interval);
-      }, 500);
-      return () => clearInterval(interval);
-    }
-  }, []);
+  //   if (!applyStyle()) {
+  //     const interval = setInterval(() => {
+  //       if (applyStyle()) clearInterval(interval);
+  //     }, 500);
+  //     return () => clearInterval(interval);
+  //   }
+  // }, []);
 
   return (
     <div
